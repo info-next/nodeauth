@@ -5,7 +5,7 @@ const config={
     },
     default : {
         SECRET: 'mysecretkey',
-        DATABASE: 'mongodb://localhost:27017/Authenticate'
+        DATABASE: 'mongodb+srv://deep:654321@ak@aks.x4g3g.mongodb.net/Authenticate?retryWrites=true&w=majority'
     }
 }
 

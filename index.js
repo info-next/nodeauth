@@ -4,7 +4,7 @@ const bodyparser=require('body-parser');
 const cookieParser=require('cookie-parser');
 const User=require('./models/user');
 const {auth} =require('./middlewares/auth');
-
+const db=require('./config/config').get(process.env.NODE_ENV);
 const app=express();
 // app use
 app.use(bodyparser.urlencoded({extended : false}));
@@ -12,16 +12,11 @@ app.use(bodyparser.json());
 app.use(cookieParser());
 
 // database connection
-const uri = "mongodb+srv://deep:654321@ak@aks.x4g3g.mongodb.net/Authenticate?retryWrites=true&w=majority";
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => {
-  console.log("MongoDB Connected…")
-})
-.catch(err => console.log(err))
-
+mongoose.Promise=global.Promise;
+mongoose.connect(db.DATABASE,{ useNewUrlParser: true,useUnifiedTopology:true },function(err){
+    if(err) console.log(err);
+    console.log("database is connected");
+});
 
 app.get('/',function(req,res){
     res.status(200).send(`Welcome to login , sign-up api`);

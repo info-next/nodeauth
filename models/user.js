@@ -1,6 +1,7 @@
 const jwt=require('jsonwebtoken');
 const bcrypt=require('bcrypt');
 const salt=10;
+const confiq=require('../config/config').get(process.env.NODE_ENV);
 var mongoose=require('mongoose');
 
 const userSchema=mongoose.Schema({
@@ -24,14 +25,12 @@ const userSchema=mongoose.Schema({
         type:String,
         required: true,
         minlength:6,
-        maxlength: 12
 
     },
     password2:{
         type:String,
         required: true,
         minlength:6,
-        maxlength: 12
 
     },
     token:{
